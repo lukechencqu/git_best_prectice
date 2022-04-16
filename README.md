@@ -2,14 +2,38 @@
 git最佳经验汇总
 
 # token令牌
+解决问题：  
+```
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+```
+```
+git config --local credential.helper ""
+vim .git/config
+修改为
+[remote "origin"]
+        url = https://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@github.com/lukechencqu/git_best_prectice.git
+
+备注：也可以用命令行修改
+git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+<your_token>：换成你自己得到的token
+<USERNAME>：是你自己github的用户名
+<REPO>：是你的仓库名称
+```
+
+## 注意事项
+
+- 只有github生成令牌时才会显示令牌内容，此时一定要把令牌复制保存到本地文件，否则一旦忘记令牌的话，github不能够显示出来之前生成的令牌内容
+- 如果实在忘记了令牌内容，那么需要更新（重新生成）令牌，并将新令牌更新到git仓库config文件中，同时，之前依赖此令牌的仓库也必须要更新为此新令牌（实在太麻烦了，因此，一定要记住令牌内容，不要搞忘记了！）   
 
 参考：  
-https://zhuanlan.zhihu.com/p/414028184
+https://zhuanlan.zhihu.com/p/414028184  
+https://baijiahao.baidu.com/s?id=1714142496447512417&wfr=spider&for=pc   
 
 
-## commit规范
+# commit规范
 Commit message（提交说明）   
-Angular规范是目前使用最广的写法，比较合理和系统化  
+Angular规范（貌似是针对js开发的？）是目前使用最广的写法，比较合理和系统化  
 ```
 feat：新功能（feature）
 fix：修补bug
@@ -18,35 +42,32 @@ style： 格式（不影响代码运行的变动）
 refactor：重构（即不是新增功能，也不是修改bug的代码变动）
 test：增加测试
 chore：构建过程或辅助工具的变动
-```
-### 规范模板工具
-git命令行：   
+``` 
 
-
-
-js开发用的：  
-Commitizen   
-
-### 从规范生成代码变动日志changle log
+### 生成日志：从规范生成代码变动日志changle log
 git命令行指令：   
 ```
+将所有原始log保存：
+git log > CHANGLELOG.txt
+使用正则表达式将所有type包含关键词feat和docs的保存：
+git log -E --grep="^(feat|docs)"> CHANGLELOG.txt
+将所有包含docs关键词的style日志保存：
+git log -E --grep="^(feat|docs)*docs"> CHANGLELOG.txt
+
+更复杂一些的保存，保存指定tags之间的日志：
 git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s" -i -E --grep="^(\[INTERNAL\]|\[FEATURE\]|\[FIX\]|\[DOC\])*\[FEATURE\]" > myfile.txt
-
+上述指令的注释：
+$(git describe --tags --abbrev=0)…HEAD
+$(git describe --tags --abbrev=0)：提取最近的一次tag
+HEAD：则是最新的Commit
+此段含义：最近的tag到最新的Commit的期间
 ```
+参考：  
+https://zhuanlan.zhihu.com/p/438070919
+https://blogs.sap.com/2018/06/22/generating-release-notes-from-git-commit-messages-using-basic-shell-commands-gitgrep/  
 
 
-js开发用的：   
-conventional-changelog    https://github.com/conventional-changelog/conventional-changelog   
-
-参考：   
-https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-https://www.jianshu.com/p/201bd81e7dc9  
-
-
-## 最常用的操作
-### 合并
-
-### 查看日志 git log
+### 查看日志： git log
 https://blogs.sap.com/2018/06/22/generating-release-notes-from-git-commit-messages-using-basic-shell-commands-gitgrep/
 ```
 指定打印排版格式：
@@ -62,6 +83,30 @@ git log --pretty=oneline 1.6.1..HEAD | wc -l
 查看指定分支的总提交次数：
 git rev-list master --count
 ```
+
+
+以下为js开发用的：   
+conventional-changelog    https://github.com/conventional-changelog/conventional-changelog   
+参考：   
+https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+https://www.jianshu.com/p/201bd81e7dc9  
+
+### 规范模板工具(目前只发现js版本的) //TODO
+git命令行：   //TODO  
+```
+git config --global commit.template /home/yu/git-commit-template.txt 
+```
+参考：  
+https://zhuanlan.zhihu.com/p/438070919   
+https://www.cnblogs.com/guyuyun/p/15028409.html  
+
+js开发用的：  
+Commitizen  
+
+# 最常用的操作
+### 合并
+
+
 
 
 ============================================
