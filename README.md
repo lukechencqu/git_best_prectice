@@ -14,9 +14,22 @@ test：增加测试
 chore：构建过程或辅助工具的变动
 ```
 ### 规范模板工具
+git命令行：   
+
+
+
+js开发用的：  
 Commitizen   
 
 ### 从规范生成代码变动日志changle log
+git命令行指令：   
+```
+git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%s" -i -E --grep="^(\[INTERNAL\]|\[FEATURE\]|\[FIX\]|\[DOC\])*\[FEATURE\]" > myfile.txt
+
+```
+
+
+js开发用的：   
 conventional-changelog    https://github.com/conventional-changelog/conventional-changelog   
 
 参考：   
@@ -27,6 +40,22 @@ https://www.jianshu.com/p/201bd81e7dc9
 ## 最常用的操作
 ### 合并
 
+### 查看日志 git log
+https://blogs.sap.com/2018/06/22/generating-release-notes-from-git-commit-messages-using-basic-shell-commands-gitgrep/
+```
+指定打印排版格式：
+git log --pretty=format:"%h - %an, %ar : %s"
+指定起始日期：
+git log --pretty=format:"%h - %an, %ar : %s" --since=2.weeks
+打印提交总次数：
+git log | wc -l
+打印自指定日期开始至今的提交总次数：
+git log --since=2.weeks | wc -l
+打印自指定tag至今的提交总次数：
+git log --pretty=oneline 1.6.1..HEAD | wc -l
+查看指定分支的总提交次数：
+git rev-list master --count
+```
 
 
 ============================================
