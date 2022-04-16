@@ -1,6 +1,12 @@
 # git_best_prectice
 git最佳经验汇总
 
+# token令牌
+
+参考：  
+https://zhuanlan.zhihu.com/p/414028184
+
+
 ## commit规范
 Commit message（提交说明）   
 Angular规范是目前使用最广的写法，比较合理和系统化  
