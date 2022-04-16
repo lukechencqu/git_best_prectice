@@ -1,6 +1,31 @@
 # git_best_prectice
 git最佳经验汇总
 
+## commit规范
+Commit message（提交说明）   
+Angular规范是目前使用最广的写法，比较合理和系统化  
+```
+feat：新功能（feature）
+fix：修补bug
+docs：文档（documentation）
+style： 格式（不影响代码运行的变动）
+refactor：重构（即不是新增功能，也不是修改bug的代码变动）
+test：增加测试
+chore：构建过程或辅助工具的变动
+```
+### 规范模板工具
+Commitizen   
+
+### 从规范生成代码变动日志changle log
+conventional-changelog    https://github.com/conventional-changelog/conventional-changelog   
+
+参考：   
+https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+https://www.jianshu.com/p/201bd81e7dc9  
+
+
+## 最常用的操作
+### 合并
 
 
 
