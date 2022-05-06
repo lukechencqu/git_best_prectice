@@ -161,6 +161,16 @@ git branch -a
 https://www.cnblogs.com/twoheads/p/9836716.html
 git push --set-upstream origin wangxiao
 
+
+### 回滚到之前的某个commit
+```
+2种方式：
+在工作区保留代码的修改及commit信息
+git reset --soft 0acc888dbb0d1a7bc299e9d0692ef56fc61d7f3e
+完全删除代码修改与commit信息
+git reset --hard 0acc888dbb0d1a7bc299e9d0692ef56fc61d7f3e
+```
+
 ## github
 ### 新建仓库
 ```
