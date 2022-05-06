@@ -164,11 +164,17 @@ git push --set-upstream origin wangxiao
 
 ### 回滚到之前的某个commit
 ```
+假如要对raw-devel版本回滚到commit为0acc888dbb0d1a7bc299e9d0692ef56fc61d7f3e的旧版本，则操作如下：
+
+第1步：回滚本地仓库
 2种方式：
 在工作区保留代码的修改及commit信息
 git reset --soft 0acc888dbb0d1a7bc299e9d0692ef56fc61d7f3e
 完全删除代码修改与commit信息
 git reset --hard 0acc888dbb0d1a7bc299e9d0692ef56fc61d7f3e
+
+第2步：将本地回滚后版本推送到远程仓库（即回滚远程仓库）
+git push --force origin raw-devel
 ```
 
 ## github
